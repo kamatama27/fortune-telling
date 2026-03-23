@@ -4,6 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MBTI せいかくしんだん</title>
+<meta name="description" content="15このしつもんに こたえるだけで、きみの せいかくタイプがわかる MBTI しんだん！ぜんぶで16しゅるいのタイプからきみはどれかな？">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+
+<!-- OGP -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="MBTI せいかくしんだん">
+<meta property="og:description" content="15このしつもんに こたえるだけで、きみの せいかくタイプがわかるよ！">
+<meta property="og:image" content="https://kamatama27.github.io/fortune-telling/yumeiro_logo.png">
+<meta property="og:url" content="https://kamatama27.github.io/fortune-telling/">
+<meta name="twitter:card" content="summary_large_image">
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VWMFJYCKS8"></script>
@@ -75,26 +85,11 @@
     position: relative;
     z-index: 1;
   }
-  header h1 {
-    font-size: 1.8rem;
-    font-weight: 900;
-    background: linear-gradient(135deg, var(--pink), var(--purple), var(--blue));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    margin-bottom: 6px;
-  }
   header p {
     color: var(--text-light);
     font-size: 0.9rem;
     font-weight: 700;
   }
-  .header-deco {
-    font-size: 2.2rem;
-    margin-bottom: 8px;
-    display: block;
-  }
-
   /* スタート画面 */
   #start-screen {
     text-align: center;
@@ -529,7 +524,7 @@ const questions = [
     a: "すぐに まわりの子に 話しかける", b: "しばらく ようすを見てから なかよくなる" },
   { dim: "EI", text: "お休みの日、どっちがいい？",
     a: "友だちと おでかけして あそぶ", b: "おうちで ゲームや どくしょをする" },
-  { dim: "EI", text: "べんきょうや さくぎょうを するとき、どっちがすき？",
+  { dim: "EI", text: "べんきょうや さぎょうを するとき、どっちがすき？",
     a: "みんながいる にぎやかなところ", b: "しずかで おちつけるところ" },
 
   // S vs N（4問）
@@ -601,12 +596,23 @@ const typeData = {
 let currentQ = 0;
 let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 let answers = []; // 回答を記録（もどる機能用）
+let shuffledQuestions = [];
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
 
 // ===== 画面制御 =====
 function startQuiz() {
   currentQ = 0;
   scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
   answers = [];
+  shuffledQuestions = shuffleArray(questions);
   document.getElementById("start-screen").style.display = "none";
   document.getElementById("quiz-screen").style.display = "block";
   document.getElementById("result-screen").style.display = "none";
@@ -615,8 +621,8 @@ function startQuiz() {
 }
 
 function showQuestion() {
-  const q = questions[currentQ];
-  const total = questions.length;
+  const q = shuffledQuestions[currentQ];
+  const total = shuffledQuestions.length;
   const pct = Math.round((currentQ / total) * 100);
 
   document.getElementById("progress-fill").style.width = pct + "%";
@@ -646,7 +652,7 @@ function showQuestion() {
 }
 
 function answer(choice) {
-  const q = questions[currentQ];
+  const q = shuffledQuestions[currentQ];
   const dim = q.dim;
   if (choice === "a") {
     scores[dim[0]]++;
@@ -663,7 +669,7 @@ function answer(choice) {
   });
 
   currentQ++;
-  if (currentQ < questions.length) {
+  if (currentQ < shuffledQuestions.length) {
     showQuestion();
   } else {
     showResult();
@@ -678,7 +684,7 @@ function goBack() {
   });
   currentQ--;
   // 前の回答のスコアを取り消す
-  const q = questions[currentQ];
+  const q = shuffledQuestions[currentQ];
   const dim = q.dim;
   const prevChoice = answers[currentQ];
   if (prevChoice === "a") {
