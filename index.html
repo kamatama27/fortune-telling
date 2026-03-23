@@ -740,11 +740,7 @@ function showResult() {
 
   let traitsHTML = info.traits.map(t => `<span class="trait-tag">${t}</span>`).join("");
 
-  // キャラ画像があるタイプのみ表示
-  const charaTypes = ['ENFJ', 'INFJ', 'INTJ'];
-  const charaHTML = charaTypes.includes(type)
-    ? `<img src="tipe_chara/${type}.png" alt="${info.name}" class="result-chara">`
-    : `<span class="result-deco">${info.emoji}</span>`;
+  const charaHTML = `<img src="tipe_chara/yumeirobear_${type.toLowerCase()}.png" alt="${info.name}" class="result-chara">`;
 
   document.getElementById("result-card").innerHTML = `
     ${charaHTML}
