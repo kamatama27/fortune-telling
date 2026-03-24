@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ゆめいろべあーず ハッピーしんだん</title>
 <meta name="description" content="15このしつもんに こたえるだけで、きみの せいかくタイプがわかる！ぜんぶで16しゅるいのタイプからきみはどれかな？">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌟</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐻</text></svg>">
 
 <!-- OGP -->
 <meta property="og:type" content="website">
@@ -458,7 +458,7 @@
 <div class="float-deco">&#x1F380;</div>
 
 <header>
-  <img src="yumeiro_logo.png" alt="ゆめいろべあーず ハッピーしんだん" class="header-logo">
+  <a href="#" onclick="goHome(); return false;"><img src="yumeiro_logo.png" alt="ゆめいろべあーず ハッピーしんだん" class="header-logo"></a>
   <p>15このしつもんで きみのタイプがわかるよ！</p>
 </header>
 
@@ -733,6 +733,12 @@ function showResult() {
 
 function retry() {
   gtag('event', 'quiz_retry', { event_category: 'quiz' });
+  document.getElementById("result-screen").style.display = "none";
+  document.getElementById("start-screen").style.display = "block";
+}
+
+function goHome() {
+  document.getElementById("quiz-screen").style.display = "none";
   document.getElementById("result-screen").style.display = "none";
   document.getElementById("start-screen").style.display = "block";
 }
