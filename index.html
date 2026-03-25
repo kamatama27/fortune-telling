@@ -474,19 +474,21 @@
     position: relative;
     overflow: hidden;
   }
-  .mobile-bears img {
+  .mobile-bears-top img,
+  .mobile-bears-bottom img {
     width: 100%;
+    height: 35vw;
+    object-fit: cover;
     display: block;
   }
-  .mobile-bears-top {
-    max-height: 35vw;
+  .mobile-bears-top img {
+    object-position: top;
   }
   .mobile-bears-bottom {
-    max-height: 35vw;
     margin-top: 20px;
   }
   .mobile-bears-bottom img {
-    margin-top: -100%;
+    object-position: bottom;
   }
 
   /* レスポンシブ */
