@@ -468,11 +468,24 @@
   /* モバイルベアーズ（スマホのみ表示） */
   .mobile-bears {
     display: none;
+    overflow: hidden;
   }
   .mobile-bears img {
     width: 100%;
+    display: block;
+  }
+  .mobile-bears-top {
     height: auto;
-    border-radius: 16px;
+  }
+  .mobile-bears-top img {
+    clip-path: inset(0 0 50% 0);
+  }
+  .mobile-bears-bottom {
+    margin-top: 20px;
+  }
+  .mobile-bears-bottom img {
+    clip-path: inset(50% 0 0 0);
+    margin-top: -100%;
   }
 
   /* レスポンシブ */
@@ -480,7 +493,9 @@
     .side-bears { display: none; }
     .mobile-bears {
       display: block;
-      margin-bottom: 20px;
+    }
+    .mobile-bears-top {
+      margin-bottom: 12px;
     }
   }
   @media (max-width: 600px) {
@@ -517,7 +532,7 @@
 
   <!-- スタート画面 -->
   <div id="start-screen">
-    <div class="mobile-bears">
+    <div class="mobile-bears mobile-bears-top">
       <img src="yumeiro_bears.png" alt="ゆめいろべあーず">
     </div>
     <div class="description">
@@ -527,6 +542,9 @@
       <p style="margin-top: 10px; font-size: 0.82rem; color: var(--text-light);">&#x23F0; だいたい2&#x301C;4ふん &#xFF0F; ぜんぶで15もん</p>
     </div>
     <button class="btn" onclick="startQuiz()">&#x1F496; しんだんスタート！</button>
+    <div class="mobile-bears mobile-bears-bottom">
+      <img src="yumeiro_bears.png" alt="ゆめいろべあーず">
+    </div>
   </div>
 
   <!-- 質問画面 -->
