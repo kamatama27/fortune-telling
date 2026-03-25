@@ -474,18 +474,14 @@
     width: 100%;
     display: block;
   }
-  .mobile-bears-top {
-    height: auto;
-  }
   .mobile-bears-top img {
-    clip-path: inset(0 0 50% 0);
+    margin-bottom: -50%;
   }
   .mobile-bears-bottom {
     margin-top: 20px;
   }
   .mobile-bears-bottom img {
-    clip-path: inset(50% 0 0 0);
-    margin-top: -100%;
+    margin-top: -50%;
   }
 
   /* レスポンシブ */
@@ -496,6 +492,12 @@
     }
     .mobile-bears-top {
       margin-bottom: 12px;
+    }
+    header {
+      padding: 16px 20px 4px;
+    }
+    #start-screen {
+      padding-top: 4px;
     }
   }
   @media (max-width: 600px) {
