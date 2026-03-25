@@ -431,8 +431,8 @@
 
   /* 結果キャラ画像 */
   .result-chara {
-    max-width: 280px;
-    width: 70%;
+    max-width: 420px;
+    width: 105%;
     height: auto;
     margin: 16px auto;
     display: block;
@@ -810,6 +810,7 @@ function showResult() {
     <div class="dimension-bars">${dimHTML}</div>
     <button class="btn-secondary" onclick="retry()">\uD83D\uDD04 もういちど やってみる！</button>
   `;
+  document.getElementById("result-screen").scrollIntoView({ behavior: 'smooth' });
 }
 
 function retry() {
