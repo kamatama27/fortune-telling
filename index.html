@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ゆめいろべあーず ハッピーしんだん | 性格診断・16タイプ</title>
-<meta name="description" content="15の質問に答えるだけで、きみの性格タイプがわかる無料診断！全16種類の性格タイプから、きみはどれかな？子ども向けの性格診断テストで楽しく自分を知ろう！">
+<title>ゆめいろべあーず ハッピーしんだん | 性格診断・16タイプ | 子供・小学生・女子向け無料診断</title>
+<meta name="description" content="小学生・子供向けの無料性格診断！12の質問に答えるだけで全16タイプからきみの性格がわかるよ。女の子に大人気のかわいい診断テスト。自己分析や友達との相性チェックにもぴったり！">
+<meta name="keywords" content="性格診断,子供,小学生,女子,女の子,無料,16タイプ,診断テスト,せいかくしんだん,自己分析,相性,かわいい">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐻</text></svg>">
 
 <!-- OGP -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="ゆめいろべあーず ハッピーしんだん | 性格診断・16タイプ">
-<meta property="og:description" content="15の質問に答えるだけで、きみの性格タイプがわかる無料診断！全16種類から自分のタイプを見つけよう！">
+<meta property="og:title" content="ゆめいろべあーず ハッピーしんだん | 子供・小学生・女子向け性格診断">
+<meta property="og:description" content="小学生・子供向けの無料性格診断！12の質問に答えるだけで全16タイプからきみの性格がわかるよ。女の子に大人気のかわいい診断テスト！">
 <meta property="og:image" content="https://kamatama27.github.io/fortune-telling/yumeiro_logo.png">
 <meta property="og:url" content="https://kamatama27.github.io/fortune-telling/">
 <meta name="twitter:card" content="summary_large_image">
@@ -534,7 +535,7 @@
 
 <header>
   <a href="#" onclick="goHome(); return false;"><img src="yumeiro_logo.png" alt="ゆめいろべあーず ハッピーしんだん" class="header-logo"></a>
-  <p>15このしつもんで きみのタイプがわかるよ！</p>
+  <p>12このしつもんで きみのタイプがわかるよ！</p>
 </header>
 
 <div class="container">
@@ -548,7 +549,7 @@
       <h2>&#x1F3C0; せいかくしんだんって なに？</h2>
       <p>しつもんに こたえるだけで、きみが どんなせいかくか わかるテストだよ！</p>
       <p>ぜんぶで 16しゅるいのタイプがあるよ。きみはどのタイプかな？</p>
-      <p style="margin-top: 10px; font-size: 0.82rem; color: var(--text-light);">&#x23F0; だいたい2&#x301C;4ふん &#xFF0F; ぜんぶで15もん</p>
+      <p style="margin-top: 10px; font-size: 0.82rem; color: var(--text-light);">&#x23F0; だいたい2&#x301C;3ふん &#xFF0F; ぜんぶで12もん</p>
     </div>
     <button class="btn" onclick="startQuiz()">&#x1F496; しんだんスタート！</button>
     <div class="mobile-bears mobile-bears-bottom">
@@ -576,35 +577,29 @@
 <script>
 // ===== 質問データ（15問）=====
 const questions = [
-  // E vs I（4問）
+  // E vs I（3問）
   { dim: "EI", text: "たくさんの人と あそんだあと、どんな気もちになる？",
     a: "たのしくて 元気いっぱいになる！", b: "つかれるから、ひとりで ゆっくりしたい" },
   { dim: "EI", text: "はじめてのクラスや ばしょに いったとき、どうする？",
     a: "すぐに まわりの子に 話しかける", b: "しばらく ようすを見てから なかよくなる" },
   { dim: "EI", text: "お休みの日、どっちがいい？",
     a: "友だちと おでかけして あそぶ", b: "おうちで ゲームや どくしょをする" },
-  { dim: "EI", text: "べんきょうや さぎょうを するとき、どっちがすき？",
-    a: "みんながいる にぎやかなところ", b: "しずかで おちつけるところ" },
 
-  // S vs N（4問）
+  // S vs N（3問）
   { dim: "SN", text: "あたらしいことを おぼえるとき、どっちがわかりやすい？",
     a: "じっさいに やってみたり、れいを見る", b: "まず ぜんたいのイメージを つかむ" },
   { dim: "SN", text: "なにかをやるとき、どっちがだいじ？",
     a: "たしかなやり方で しっかりやる", b: "あたらしいやり方を ためしてみる" },
   { dim: "SN", text: "きみがきになるのは、どっち？",
     a: "いま 目のまえで おきていること", b: "これから どうなるかの「みらい」のこと" },
-  { dim: "SN", text: "えんそくや おでかけの けいかくは？",
-    a: "どこに行って 何をするか こまかく決めたい", b: "だいたい決めて、あとは そのときのきぶんで" },
 
-  // T vs F（4問）
+  // T vs F（3問）
   { dim: "TF", text: "なにかを 決めるとき、どっちをだいじにする？",
     a: "どっちが ただしいか りゆうをかんがえる", b: "自分や まわりの人の 気もちをかんがえる" },
   { dim: "TF", text: "友だちが なやんでいるとき、どうする？",
     a: "「こうしたらいいよ」と アドバイスする", b: "「そうだよね、わかるよ」と よりそう" },
   { dim: "TF", text: "グループで いけんが わかれたとき、どうしたい？",
     a: "いちばんいい ほうほうを 考えてえらぶ", b: "みんなが「いいよ」と 言えるものをさがす" },
-  { dim: "TF", text: "だれかのことを すごいなと思うのは どんなとき？",
-    a: "テストでいい点を とったり、じょうずに できたとき", b: "がんばっていたり、やさしく してくれたとき" },
 
   // J vs P（3問）
   { dim: "JP", text: "なにかをやるまえに、どうする？",
