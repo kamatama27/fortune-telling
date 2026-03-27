@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node _generate_ogp.js)",
+      "Bash(where node:*)",
+      "Read(//c/Program Files/nodejs/**)",
+      "Read(//c/Users/kamat/Desktop/デモ/mbtidemo/$LOCALAPPDATA/Programs/nodejs/**)",
+      "Read(//c/Users/kamat/Desktop/デモ/mbtidemo/$PROGRAMFILES/nodejs/**)",
+      "Bash(cmd.exe /c \"where node\" 2>/dev/null)",
+      "Bash(cmd.exe /c \"where python\" 2>/dev/null)",
+      "Bash(/c/Python*/python.exe)",
+      "Bash(--version)"
+    ]
+  }
+}

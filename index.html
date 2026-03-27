@@ -876,7 +876,7 @@ function shareButtonsHTML(type) {
 
 function shareLINE(type) {
   const info = typeData[type];
-  const url = 'https://shindan.yonde-web.com/?type=' + type.toLowerCase();
+  const url = 'https://shindan.yonde-web.com/result/' + type.toLowerCase() + '/';
   const text = '\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A \u30CF\u30C3\u30D4\u30FC\u3057\u3093\u3060\u3093\u3067\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\u3060\u3063\u305F\u3088\uFF01\u2728\n' + url;
   window.open('https://line.me/R/share?text=' + encodeURIComponent(text), '_blank');
   gtag('event', 'share', { event_category: 'share', method: 'LINE', content_type: type });
@@ -884,26 +884,19 @@ function shareLINE(type) {
 
 function shareX(type) {
   const info = typeData[type];
-  const url = 'https://shindan.yonde-web.com/?type=' + type.toLowerCase();
+  const url = 'https://shindan.yonde-web.com/result/' + type.toLowerCase() + '/';
   const text = '\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A \u30CF\u30C3\u30D4\u30FC\u3057\u3093\u3060\u3093\u3067\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\u3060\u3063\u305F\u3088\uFF01\u2728';
   window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank');
   gtag('event', 'share', { event_category: 'share', method: 'X', content_type: type });
 }
 
 function saveImage(type) {
-  const src = 'tipe_chara/yumeirobear_' + type.toLowerCase() + '.png';
-  fetch(src)
-    .then(function(res) { return res.blob(); })
-    .then(function(blob) {
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'yumeirobear_' + type.toLowerCase() + '.png';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    });
+  var a = document.createElement('a');
+  a.href = 'tipe_chara/yumeirobear_' + type.toLowerCase() + '.png';
+  a.download = 'yumeirobear_' + type.toLowerCase() + '.png';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
   gtag('event', 'share', { event_category: 'share', method: 'Instagram', content_type: type });
 }
 
