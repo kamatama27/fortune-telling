@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shindan.yonde-web.com/sitemap.xml

@@ -9,7 +9,8 @@
       "Bash(cmd.exe /c \"where node\" 2>/dev/null)",
       "Bash(cmd.exe /c \"where python\" 2>/dev/null)",
       "Bash(/c/Python*/python.exe)",
-      "Bash(--version)"
+      "Bash(--version)",
+      "Bash(done)"
     ]
   }
 }
