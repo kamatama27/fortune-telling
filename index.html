@@ -443,6 +443,70 @@
     height: 48px;
   }
 
+  /* おともだちモード */
+  #friend-name-screen { display: none; }
+  .btn-friend {
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    margin-top: 10px;
+  }
+  .btn-friend:hover {
+    box-shadow: 0 6px 24px rgba(199,125,255,0.45);
+  }
+  .btn-secondary-friend {
+    color: var(--purple);
+    border-color: var(--purple);
+  }
+  .btn-secondary-friend:hover {
+    background: linear-gradient(135deg, var(--purple), var(--blue));
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(199,125,255,0.35);
+  }
+  .name-input-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0 8px;
+  }
+  .name-input {
+    font-family: inherit;
+    font-size: 1.2rem;
+    font-weight: 700;
+    padding: 10px 16px;
+    border: 2.5px solid var(--pink);
+    border-radius: 16px;
+    width: 150px;
+    text-align: center;
+    outline: none;
+    color: var(--text);
+    background: #fff;
+  }
+  .name-input:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(199,125,255,0.2);
+  }
+  .name-suffix {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--text);
+  }
+  .name-hint {
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-bottom: 16px;
+  }
+  .quiz-mode-label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--purple);
+    margin-bottom: 10px;
+    padding: 6px 16px;
+    background: var(--purple-pale);
+    border-radius: 20px;
+    display: inline-block;
+  }
+
   /* floating decorations */
   .float-deco {
     position: fixed;
@@ -575,7 +639,7 @@
 
 <header>
   <a href="#" onclick="goHome(); return false;"><img src="yumeiro_logo.png" alt="ゆめいろべあーず ハッピーしんだん" class="header-logo"></a>
-  <p>12このしつもんで きみのタイプがわかるよ！</p>
+  <p>12このしつもんで せいかくタイプがわかるよ！</p>
 </header>
 
 <div class="container">
@@ -591,9 +655,23 @@
       <p>ぜんぶで 16しゅるいのタイプがあるよ。きみはどのタイプかな？</p>
       <p style="margin-top: 10px; font-size: 0.82rem; color: var(--text-light);">&#x23F0; だいたい2&#x301C;3ふん &#xFF0F; ぜんぶで12もん</p>
     </div>
-    <button class="btn" onclick="startQuiz()">&#x1F496; しんだんスタート！</button>
+    <button class="btn" onclick="startSelfQuiz()">&#x1F496; じぶんを しんだん！</button>
+    <button class="btn btn-friend" onclick="showFriendNameScreen()">&#x1F49C; おともだちを しんだん！</button>
     <div class="mobile-bears mobile-bears-bottom">
       <img src="yumeiro_bears.png" alt="ゆめいろべあーず">
+    </div>
+  </div>
+
+  <!-- おともだち名前入力画面 -->
+  <div id="friend-name-screen">
+    <div class="question-card" style="text-align:center;">
+      <h2>&#x1F43B; おともだちの なまえは？</h2>
+      <div class="name-input-wrap">
+        <input type="text" id="friend-name-input" placeholder="なまえ" class="name-input" onkeydown="if(event.key==='Enter')confirmFriendName()">
+        <span class="name-suffix">ちゃん</span>
+      </div>
+      <p class="name-hint">※ からっぽでも OK！（ともくまちゃんになるよ）</p>
+      <button class="btn btn-friend" onclick="confirmFriendName()">&#x1F49C; しんだんスタート！</button>
     </div>
   </div>
 
@@ -691,6 +769,8 @@ let currentQ = 0;
 let scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
 let answers = []; // 回答を記録（もどる機能用）
 let shuffledQuestions = [];
+let quizMode = 'self'; // 'self' or 'friend'
+let friendName = '';
 
 function shuffleArray(arr) {
   const a = [...arr];
@@ -702,16 +782,40 @@ function shuffleArray(arr) {
 }
 
 // ===== 画面制御 =====
+function startSelfQuiz() {
+  quizMode = 'self';
+  friendName = '';
+  startQuiz();
+}
+
+function showFriendNameScreen() {
+  document.getElementById("start-screen").style.display = "none";
+  document.getElementById("result-screen").style.display = "none";
+  document.getElementById("quiz-screen").style.display = "none";
+  document.getElementById("friend-name-screen").style.display = "block";
+  document.getElementById("friend-name-input").value = '';
+  document.getElementById("friend-name-input").focus();
+}
+
+function confirmFriendName() {
+  quizMode = 'friend';
+  var input = document.getElementById("friend-name-input").value.trim();
+  friendName = input ? input + '\u3061\u3083\u3093' : '\u3068\u3082\u304F\u307E\u3061\u3083\u3093';
+  document.getElementById("friend-name-screen").style.display = "none";
+  startQuiz();
+}
+
 function startQuiz() {
   currentQ = 0;
   scores = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
   answers = [];
   shuffledQuestions = shuffleArray(questions);
   document.getElementById("start-screen").style.display = "none";
+  document.getElementById("friend-name-screen").style.display = "none";
   document.getElementById("quiz-screen").style.display = "block";
   document.getElementById("result-screen").style.display = "none";
   showQuestion();
-  gtag('event', 'quiz_start', { event_category: 'quiz' });
+  gtag('event', 'quiz_start', { event_category: 'quiz', mode: quizMode });
 }
 
 function showQuestion() {
@@ -722,8 +826,13 @@ function showQuestion() {
   document.getElementById("progress-fill").style.width = pct + "%";
   document.getElementById("progress-text").textContent = `\u2B50 ${currentQ + 1} / ${total} もんめ \u2B50`;
 
+  const modeLabel = quizMode === 'friend'
+    ? `<div class="quiz-mode-label">\uD83D\uDC3B ${friendName}の しんだんちゅう</div>`
+    : '';
+
   const card = document.getElementById("question-card");
   card.innerHTML = `
+    ${modeLabel}
     <span class="question-num">Q${currentQ + 1}</span>
     <h2>${q.text}</h2>
     <div class="options">
@@ -839,15 +948,17 @@ function showResult() {
   // OGP画像を結果のくまに更新
   updateOGP(type);
 
+  const resultName = quizMode === 'friend' ? friendName : '\u304D\u307F';
+
   document.getElementById("result-card").innerHTML = `
     ${charaHTML}
     <div class="type-label">${type}</div>
-    <div class="type-name">きみは「${info.name}」タイプ！</div>
+    <div class="type-name">${resultName}\u306F\u300C${info.name}\u300D\u30BF\u30A4\u30D7\uFF01</div>
     <div class="traits">${traitsHTML}</div>
     <div class="type-desc">${info.desc}</div>
     <div class="dimension-bars">${dimHTML}</div>
     ${shareButtonsHTML(type)}
-    <button class="btn-secondary" onclick="retry()">\uD83D\uDD04 もういちど やってみる！</button>
+    ${resultButtonsHTML()}
   `;
   document.getElementById("result-screen").scrollIntoView({ behavior: 'smooth' });
 }
@@ -874,18 +985,24 @@ function shareButtonsHTML(type) {
     </div>`;
 }
 
-function shareLINE(type) {
+function shareText(type) {
   const info = typeData[type];
+  if (quizMode === 'friend') {
+    return '\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A \u30CF\u30C3\u30D4\u30FC\u3057\u3093\u3060\u3093\u3067' + friendName + '\u306F\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\u3060\u3063\u305F\u3088\uFF01\u2728';
+  }
+  return '\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A \u30CF\u30C3\u30D4\u30FC\u3057\u3093\u3060\u3093\u3067\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\u3060\u3063\u305F\u3088\uFF01\u2728';
+}
+
+function shareLINE(type) {
   const url = 'https://shindan.yonde-web.com/result/' + type.toLowerCase() + '/';
-  const text = '\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A \u30CF\u30C3\u30D4\u30FC\u3057\u3093\u3060\u3093\u3067\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\u3060\u3063\u305F\u3088\uFF01\u2728\n' + url;
+  const text = shareText(type) + '\n' + url;
   window.open('https://line.me/R/share?text=' + encodeURIComponent(text), '_blank');
   gtag('event', 'share', { event_category: 'share', method: 'LINE', content_type: type });
 }
 
 function shareX(type) {
-  const info = typeData[type];
   const url = 'https://shindan.yonde-web.com/result/' + type.toLowerCase() + '/';
-  const text = '\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A \u30CF\u30C3\u30D4\u30FC\u3057\u3093\u3060\u3093\u3067\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\u3060\u3063\u305F\u3088\uFF01\u2728\n#\u6027\u683C\u8A3A\u65AD #16\u30BF\u30A4\u30D7 #\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A';
+  const text = shareText(type) + '\n#\u6027\u683C\u8A3A\u65AD #16\u30BF\u30A4\u30D7 #\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A';
   window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), 'share_x', 'width=550,height=420,scrollbars=yes');
   gtag('event', 'share', { event_category: 'share', method: 'X', content_type: type });
 }
@@ -907,6 +1024,16 @@ function updateOGP(type) {
   }
 }
 
+function resultButtonsHTML() {
+  if (quizMode === 'self') {
+    return '<button class="btn-secondary btn-secondary-friend" onclick="showFriendNameScreen()">\uD83D\uDC9C \u304A\u3068\u3082\u3060\u3061\u3082 \u3057\u3093\u3060\u3093\u3059\u308B\uFF01</button>' +
+      '<button class="btn-secondary" onclick="retry()">\uD83D\uDD04 \u3082\u3046\u3044\u3061\u3069 \u3084\u3063\u3066\u307F\u308B\uFF01</button>';
+  } else {
+    return '<button class="btn-secondary" onclick="startSelfQuiz()">\uD83D\uDC96 \u3058\u3076\u3093\u3082 \u3084\u3063\u3066\u307F\u308B\uFF01</button>' +
+      '<button class="btn-secondary btn-secondary-friend" onclick="showFriendNameScreen()">\uD83D\uDD04 \u3082\u3046\u3044\u3061\u3069 \u3068\u3082\u3060\u3061\u3057\u3093\u3060\u3093\u3092 \u3084\u3063\u3066\u307F\u308B\uFF01</button>';
+  }
+}
+
 function retry() {
   gtag('event', 'quiz_retry', { event_category: 'quiz' });
   document.getElementById("result-screen").style.display = "none";
@@ -916,6 +1043,7 @@ function retry() {
 function goHome() {
   document.getElementById("quiz-screen").style.display = "none";
   document.getElementById("result-screen").style.display = "none";
+  document.getElementById("friend-name-screen").style.display = "none";
   document.getElementById("start-screen").style.display = "block";
 }
 
