@@ -130,6 +130,52 @@
     transform: translateY(0) scale(0.98);
   }
 
+  .official-links {
+    margin-top: 22px;
+    padding-top: 18px;
+    position: relative;
+  }
+  .official-links::before {
+    content: '';
+    display: block;
+    width: min(220px, 62%);
+    height: 2px;
+    margin: 0 auto 12px;
+    background: linear-gradient(90deg, transparent, var(--purple-light), transparent);
+    border-radius: 999px;
+    opacity: 0.9;
+  }
+  .official-links-title {
+    font-size: 0.88rem;
+    font-weight: 900;
+    color: var(--text-light);
+    margin-bottom: 8px;
+  }
+  .official-links-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .official-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1;
+    transition: color 0.25s, transform 0.25s;
+  }
+  .official-link:hover {
+    color: var(--pink);
+    transform: translateY(-1px);
+  }
+  .official-link-icon {
+    display: none;
+  }
+
   /* プログレスバー */
   .progress-wrap {
     margin-bottom: 20px;
@@ -443,6 +489,10 @@
     height: 48px;
   }
 
+  .result-links {
+    margin: 18px 0 8px;
+  }
+
   /* おともだちモード */
   #friend-name-screen { display: none; }
   .btn-friend {
@@ -657,6 +707,14 @@
     </div>
     <button class="btn" onclick="startSelfQuiz()">&#x1F496; じぶんを しんだん！</button>
     <button class="btn btn-friend" onclick="showFriendNameScreen()">&#x1F49C; おともだちを しんだん！</button>
+    <div class="official-links">
+      <div class="official-links-title">&#x1F308; もっと ゆめいろべあーずを たのしむ &#x1F308;</div>
+      <div class="official-links-grid">
+        <a class="official-link portal" href="https://yumeiro.yonde-web.com/" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('portal', 'start')">ゆめいろポータル</a>
+        <a class="official-link x-link" href="https://x.com/StorybookYonde" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('x', 'start')">X</a>
+        <a class="official-link instagram" href="https://www.instagram.com/yonde.storybook/" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('instagram', 'start')">Instagram</a>
+      </div>
+    </div>
     <div class="mobile-bears mobile-bears-bottom">
       <img src="yumeiro_bears.png" alt="ゆめいろべあーず">
     </div>
@@ -958,6 +1016,7 @@ function showResult() {
     <div class="type-desc">${info.desc}</div>
     <div class="dimension-bars">${dimHTML}</div>
     ${shareButtonsHTML(type)}
+    ${officialLinksHTML('result')}
     ${resultButtonsHTML()}
   `;
   document.getElementById("result-screen").scrollIntoView({ behavior: 'smooth' });
@@ -991,6 +1050,26 @@ function shareText(type) {
     return '\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A \u30CF\u30C3\u30D4\u30FC\u3057\u3093\u3060\u3093\u3067' + friendName + '\u306F\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\u3060\u3063\u305F\u3088\uFF01\u2728';
   }
   return '\u3086\u3081\u3044\u308D\u3079\u3042\u30FC\u305A \u30CF\u30C3\u30D4\u30FC\u3057\u3093\u3060\u3093\u3067\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\u3060\u3063\u305F\u3088\uFF01\u2728';
+}
+
+function officialLinksHTML(source) {
+  return `
+    <div class="official-links result-links">
+      <div class="official-links-title">\uD83D\uDCD6 もっと ゆめいろべあーずを たのしむ \uD83D\uDCD6</div>
+      <div class="official-links-grid">
+        <a class="official-link portal" href="https://yumeiro.yonde-web.com/" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('portal', '${source}')">\u3086\u3081\u3044\u308D\u30DD\u30FC\u30BF\u30EB</a>
+        <a class="official-link x-link" href="https://x.com/StorybookYonde" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('x', '${source}')">X</a>
+        <a class="official-link instagram" href="https://www.instagram.com/yonde.storybook/" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('instagram', '${source}')">Instagram</a>
+      </div>
+    </div>`;
+}
+
+function trackOfficialLink(destination, source) {
+  gtag('event', 'official_link_click', {
+    event_category: 'official_link',
+    destination: destination,
+    source: source
+  });
 }
 
 function shareLINE(type) {
@@ -1066,6 +1145,7 @@ function goHome() {
       '<div class="traits">' + traitsHTML + '</div>' +
       '<div class="type-desc">' + info.desc + '</div>' +
       shareButtonsHTML(type) +
+      officialLinksHTML('direct_result') +
       '<button class="btn-secondary" onclick="startQuiz()">\u2728 \u3058\u3076\u3093\u3082 \u3084\u3063\u3066\u307F\u308B\uFF01</button>';
   }
 })();
