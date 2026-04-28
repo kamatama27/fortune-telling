@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ゆめいろべあーず ハッピーしんだん | 性格診断・16タイプ | 子供・小学生・女子向け無料診断</title>
+<title>ゆめいろべあーず ハッピーしんだん | 小学生向け16タイプ性格診断</title>
 <meta name="description" content="小学生・子供向けの無料性格診断！12の質問に答えるだけで全16タイプからきみの性格がわかるよ。女の子に大人気のかわいい診断テスト。自己分析や友達との相性チェックにもぴったり！">
 <meta name="keywords" content="性格診断,子供,小学生,女子,女の子,無料,16タイプ,診断テスト,せいかくしんだん,自己分析,相性,かわいい">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐻</text></svg>">
@@ -11,7 +11,7 @@
 
 <!-- OGP -->
 <meta property="og:type" content="website">
-<meta property="og:title" content="ゆめいろべあーず ハッピーしんだん | 子供・小学生・女子向け性格診断">
+<meta property="og:title" content="ゆめいろべあーず ハッピーしんだん | 小学生向け16タイプ性格診断">
 <meta property="og:description" content="小学生・子供向けの無料性格診断！12の質問に答えるだけで全16タイプからきみの性格がわかるよ。女の子に大人気のかわいい診断テスト！">
 <meta property="og:image" content="https://shindan.yonde-web.com/yumeiro_logo.png">
 <meta property="og:url" content="https://shindan.yonde-web.com/">
@@ -79,6 +79,18 @@
     color: var(--text-light);
     font-size: 0.9rem;
     font-weight: 700;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
   }
   /* スタート画面 */
   #start-screen {
@@ -688,6 +700,7 @@
 <div class="float-deco">&#x1F380;</div>
 
 <header>
+  <h1 class="sr-only">ゆめいろべあーず ハッピーしんだん 小学生向け16タイプ性格診断</h1>
   <a href="#" onclick="goHome(); return false;"><img src="yumeiro_logo.png" alt="ゆめいろべあーず ハッピーしんだん" class="header-logo"></a>
   <p>12このしつもんで せいかくタイプがわかるよ！</p>
 </header>
