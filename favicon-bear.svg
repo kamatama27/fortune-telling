@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title>ゆめいろべあーず くまかお</title>
+  <defs>
+    <radialGradient id="faceGlow" cx="50%" cy="42%" r="62%">
+      <stop offset="0%" stop-color="#ffd9eb"/>
+      <stop offset="100%" stop-color="#f5b9d4"/>
+    </radialGradient>
+    <radialGradient id="muzzleGlow" cx="50%" cy="38%" r="68%">
+      <stop offset="0%" stop-color="#fffef9"/>
+      <stop offset="100%" stop-color="#fff4d9"/>
+    </radialGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1.5" stdDeviation="1.8" flood-color="#d57ca6" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#softShadow)">
+    <circle cx="17" cy="18" r="10" fill="#f7c2da"/>
+    <circle cx="47" cy="18" r="10" fill="#f7c2da"/>
+    <circle cx="17" cy="18" r="5.6" fill="#ee97be"/>
+    <circle cx="47" cy="18" r="5.6" fill="#ee97be"/>
+    <circle cx="32" cy="34" r="24" fill="url(#faceGlow)"/>
+    <ellipse cx="24" cy="44.5" rx="5" ry="3.2" fill="#f6a8c7" opacity="0.55"/>
+    <ellipse cx="40" cy="44.5" rx="5" ry="3.2" fill="#f6a8c7" opacity="0.55"/>
+    <ellipse cx="32" cy="40.5" rx="10.5" ry="8.2" fill="url(#muzzleGlow)"/>
+    <circle cx="23.5" cy="34.5" r="4.6" fill="#ef6ea8"/>
+    <circle cx="40.5" cy="34.5" r="4.6" fill="#ef6ea8"/>
+    <circle cx="22.1" cy="32.8" r="1.7" fill="#ffffff"/>
+    <circle cx="38.9" cy="32.8" r="1.7" fill="#ffffff"/>
+    <circle cx="25.2" cy="36.8" r="1.05" fill="#ffffff" opacity="0.9"/>
+    <circle cx="42.1" cy="36.8" r="1.05" fill="#ffffff" opacity="0.9"/>
+    <path d="M32 37.2c1.85 0 3.35 1.35 3.35 3.05 0 1.7-1.5 3.05-3.35 3.05-1.85 0-3.35-1.35-3.35-3.05 0-1.7 1.5-3.05 3.35-3.05Z" fill="#ef6ea8"/>
+    <path d="M30.9 41.7l-2.5 2.85m5.2-2.85l2.5 2.85" fill="none" stroke="#ef6ea8" stroke-linecap="round" stroke-width="1.8"/>
+  </g>
+</svg>
