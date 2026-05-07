@@ -81,6 +81,17 @@
     font-weight: 700;
   }
 
+  ruby {
+    ruby-align: center;
+  }
+
+  rt {
+    font-size: 0.48em;
+    line-height: 1;
+    letter-spacing: 0;
+    font-weight: 700;
+  }
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -702,7 +713,7 @@
 <header>
   <h1 class="sr-only">ゆめいろべあーず ハッピーしんだん 小学生向け16タイプ性格診断</h1>
   <a href="#" onclick="goHome(); return false;"><img src="yumeiro_logo.png" alt="ゆめいろべあーず ハッピーしんだん" class="header-logo"></a>
-  <p>12このしつもんで せいかくタイプがわかるよ！</p>
+  <p>12この <ruby>質問<rt>しつもん</rt></ruby>で <ruby>性格<rt>せいかく</rt></ruby>タイプがわかるよ！</p>
 </header>
 
 <div class="container">
@@ -713,15 +724,15 @@
       <img src="yumeiro_bears.png" alt="ゆめいろべあーず">
     </div>
     <div class="description">
-      <h2>&#x1F3C0; せいかくしんだんって なに？</h2>
-      <p>しつもんに こたえるだけで、きみが どんなせいかくか わかるテストだよ！</p>
-      <p>ぜんぶで 16しゅるいのタイプがあるよ。きみはどのタイプかな？</p>
-      <p style="margin-top: 10px; font-size: 0.82rem; color: var(--text-light);">&#x23F0; だいたい2&#x301C;3ふん &#xFF0F; ぜんぶで12もん</p>
+      <h2>&#x1F3C0; <ruby>性格診断<rt>せいかくしんだん</rt></ruby>って なに？</h2>
+      <p><ruby>質問<rt>しつもん</rt></ruby>に <ruby>答<rt>こた</rt></ruby>えるだけで、<ruby>君<rt>きみ</rt></ruby>が どんな <ruby>性格<rt>せいかく</rt></ruby>か わかるテストだよ！</p>
+      <p><ruby>全部<rt>ぜんぶ</rt></ruby>で 16<ruby>種類<rt>しゅるい</rt></ruby>のタイプがあるよ。<ruby>君<rt>きみ</rt></ruby>は どのタイプかな？</p>
+      <p style="margin-top: 10px; font-size: 0.82rem; color: var(--text-light);">&#x23F0; だいたい2&#x301C;3<ruby>分<rt>ふん</rt></ruby> &#xFF0F; <ruby>全部<rt>ぜんぶ</rt></ruby>で12<ruby>問<rt>もん</rt></ruby></p>
     </div>
-    <button class="btn" onclick="startSelfQuiz()">&#x1F496; じぶんを しんだん！</button>
-    <button class="btn btn-friend" onclick="showFriendNameScreen()">&#x1F49C; おともだちを しんだん！</button>
+    <button class="btn" onclick="startSelfQuiz()">&#x1F496; <ruby>自分<rt>じぶん</rt></ruby>を <ruby>診断<rt>しんだん</rt></ruby>！</button>
+    <button class="btn btn-friend" onclick="showFriendNameScreen()">&#x1F49C; <ruby>友<rt>とも</rt></ruby>だちを <ruby>診断<rt>しんだん</rt></ruby>！</button>
     <div class="official-links">
-      <div class="official-links-title">&#x1F308; もっと ゆめいろべあーずを たのしむ &#x1F308;</div>
+      <div class="official-links-title">&#x1F308; もっと ゆめいろべあーずを <ruby>楽<rt>たの</rt></ruby>しむ &#x1F308;</div>
       <div class="official-links-grid">
         <a class="official-link portal" href="https://yumeiro.yonde-web.com/" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('portal', 'start')">ゆめいろポータル</a>
         <a class="official-link x-link" href="https://x.com/StorybookYonde" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('x', 'start')">X</a>
@@ -736,13 +747,13 @@
   <!-- おともだち名前入力画面 -->
   <div id="friend-name-screen">
     <div class="question-card" style="text-align:center;">
-      <h2>&#x1F43B; おともだちの なまえは？</h2>
+      <h2>&#x1F43B; <ruby>友<rt>とも</rt></ruby>だちの <ruby>名前<rt>なまえ</rt></ruby>は？</h2>
       <div class="name-input-wrap">
-        <input type="text" id="friend-name-input" placeholder="なまえ" class="name-input" onkeydown="if(event.key==='Enter')confirmFriendName()">
+        <input type="text" id="friend-name-input" placeholder="名前" class="name-input" onkeydown="if(event.key==='Enter')confirmFriendName()">
         <span class="name-suffix">ちゃん</span>
       </div>
-      <p class="name-hint">※ からっぽでも OK！（ともくまちゃんになるよ）</p>
-      <button class="btn btn-friend" onclick="confirmFriendName()">&#x1F49C; しんだんスタート！</button>
+      <p class="name-hint">※ <ruby>空<rt>から</rt></ruby>っぽでも OK！（ともくまちゃんになるよ）</p>
+      <button class="btn btn-friend" onclick="confirmFriendName()">&#x1F49C; <ruby>診断<rt>しんだん</rt></ruby>スタート！</button>
     </div>
   </div>
 
@@ -764,75 +775,141 @@
 </div>
 
 <script>
-// ===== 質問データ（15問）=====
+// ===== 質問データ（12問）=====
+const rb = (text, yomi) => `<ruby>${text}<rt>${yomi}</rt></ruby>`;
+
 const questions = [
   // E vs I（3問）
-  { dim: "EI", text: "たくさんの人と あそんだあと、どんな気もちになる？",
-    a: "たのしくて 元気いっぱいになる！", b: "つかれるから、ひとりで ゆっくりしたい" },
-  { dim: "EI", text: "はじめてのクラスや ばしょに いったとき、どうする？",
-    a: "すぐに まわりの子に 話しかける", b: "しばらく ようすを見てから なかよくなる" },
-  { dim: "EI", text: "お休みの日、どっちがいい？",
-    a: "友だちと おでかけして あそぶ", b: "おうちで ゲームや どくしょをする" },
+  { dim: "EI", text: `たくさんの ${rb("人", "ひと")}と あそんだあと、どんな ${rb("気持", "きも")}ちに なる？`,
+    a: `たのしくて ${rb("元気", "げんき")}いっぱいに なる！`, b: "つかれるから、ひとりで ゆっくりしたい" },
+  { dim: "EI", text: `はじめての クラスや ${rb("場所", "ばしょ")}に いったとき、どうする？`,
+    a: `すぐに まわりの ${rb("子", "こ")}に ${rb("話", "はな")}しかける`, b: `しばらく ${rb("様子", "ようす")}を ${rb("見", "み")}てから なかよくなる` },
+  { dim: "EI", text: `${rb("休", "やす")}みの ${rb("日", "ひ")}、どっちがいい？`,
+    a: `${rb("友", "とも")}だちと おでかけして あそぶ`, b: `おうちで ゲームや ${rb("読書", "どくしょ")}をする` },
 
   // S vs N（3問）
-  { dim: "SN", text: "あたらしいことを おぼえるとき、どっちがわかりやすい？",
-    a: "じっさいに やってみたり、れいを見る", b: "まず ぜんたいのイメージを つかむ" },
-  { dim: "SN", text: "なにかをやるとき、どっちがだいじ？",
-    a: "たしかなやり方で しっかりやる", b: "あたらしいやり方を ためしてみる" },
-  { dim: "SN", text: "きみがきになるのは、どっち？",
-    a: "いま 目のまえで おきていること", b: "これから どうなるかの「みらい」のこと" },
+  { dim: "SN", text: `あたらしいことを おぼえるとき、どっちが わかりやすい？`,
+    a: `${rb("実際", "じっさい")}に やってみたり、れいを ${rb("見", "み")}る`, b: `まず ${rb("全体", "ぜんたい")}の イメージを つかむ` },
+  { dim: "SN", text: `なにかを やるとき、どっちが ${rb("大事", "だいじ")}？`,
+    a: `たしかな やり${rb("方", "かた")}で しっかりやる`, b: `あたらしい やり${rb("方", "かた")}を ためしてみる` },
+  { dim: "SN", text: `${rb("君", "きみ")}が ${rb("気", "き")}になるのは、どっち？`,
+    a: `いま ${rb("目", "め")}のまえで おきていること`, b: `これから どうなるかの「${rb("未来", "みらい")}」のこと` },
 
   // T vs F（3問）
-  { dim: "TF", text: "なにかを 決めるとき、どっちをだいじにする？",
-    a: "どっちが ただしいか りゆうをかんがえる", b: "自分や まわりの人の 気もちをかんがえる" },
-  { dim: "TF", text: "友だちが なやんでいるとき、どうする？",
+  { dim: "TF", text: `なにかを ${rb("決", "き")}めるとき、どっちを ${rb("大事", "だいじ")}にする？`,
+    a: `どっちが ただしいか ${rb("理由", "りゆう")}を ${rb("考", "かんが")}える`, b: `${rb("自分", "じぶん")}や まわりの ${rb("人", "ひと")}の ${rb("気持", "きも")}ちを ${rb("考", "かんが")}える` },
+  { dim: "TF", text: `${rb("友", "とも")}だちが なやんでいるとき、どうする？`,
     a: "「こうしたらいいよ」と アドバイスする", b: "「そうだよね、わかるよ」と よりそう" },
-  { dim: "TF", text: "グループで いけんが わかれたとき、どうしたい？",
-    a: "いちばんいい ほうほうを 考えてえらぶ", b: "みんなが「いいよ」と 言えるものをさがす" },
+  { dim: "TF", text: `グループで ${rb("意見", "いけん")}が わかれたとき、どうしたい？`,
+    a: `いちばんいい ${rb("方法", "ほうほう")}を ${rb("考", "かんが")}えて えらぶ`, b: `みんなが「いいよ」と ${rb("言", "い")}えるものを さがす` },
 
   // J vs P（3問）
-  { dim: "JP", text: "なにかをやるまえに、どうする？",
-    a: "さきに けいかくを たててからやる", b: "まずやってみて、あとから かんがえる" },
-  { dim: "JP", text: "しゅくだいは どうやってやる？",
-    a: "早めに おわらせて、あとで ゆっくりする", b: "しめきりギリギリに がんばる" },
-  { dim: "JP", text: "おでかけ中に よていが かわったら、どう思う？",
-    a: "ちょっといやだな、けいかくどおりがいい", b: "おもしろそう！たのしめる！" },
+  { dim: "JP", text: `なにかを やるまえに、どうする？`,
+    a: `さきに ${rb("計画", "けいかく")}を たててから やる`, b: `まず やってみて、あとから ${rb("考", "かんが")}える` },
+  { dim: "JP", text: `${rb("宿題", "しゅくだい")}は どうやって やる？`,
+    a: `${rb("早", "はや")}めに おわらせて、あとで ゆっくりする`, b: "しめきり ギリギリに がんばる" },
+  { dim: "JP", text: `おでかけ${rb("中", "ちゅう")}に ${rb("予定", "よてい")}が かわったら、どう ${rb("思", "おも")}う？`,
+    a: `ちょっと いやだな、${rb("計画", "けいかく")}どおりがいい`, b: "おもしろそう！ たのしめる！" },
 ];
 
 // ===== 16タイプデータ =====
 const typeData = {
-  ISTJ: { name: "たよれる！みんなのやさしい先生", emoji: "\uD83D\uDCD6", traits: ["まじめ", "きちんとしてる", "やくそくをまもる", "しんらいできる"],
-    desc: "しずかで まじめな がんばりやさん。やくそくや ルールを だいじにして、さいごまで きちんと やりとげるよ。みんなから しんらいされる すてきなタイプだよ！" },
-  ISFJ: { name: "ぽかぽか！やさしいエンジェル", emoji: "\uD83C\uDF3C", traits: ["やさしい", "おもいやり", "まもってくれる", "がまんづよい"],
-    desc: "あたたかくて やさしい、みんなを そっと ささえてくれる子。まわりの人の 気もちに よくきづいて、こまっている子を たすけてあげるよ。" },
-  INFJ: { name: "ひみつのやさしいまほうつかい", emoji: "\uD83C\uDF1F", traits: ["おもいやり", "ゆめがある", "そうぞう力", "やさしい"],
-    desc: "こころの おくに おおきな ゆめをもつ やさしい子。まわりの人の 気もちが よくわかって、みんなが しあわせになることを いつもかんがえているよ。" },
-  INTJ: { name: "クールなちょう☆てんさい！", emoji: "\uD83E\uDDE0", traits: ["あたまがいい", "けいかくじょうず", "どくりつしん", "もくひょうがある"],
-    desc: "じぶんで かんがえて けいかくを たてるのが とくいな子。なにかを もっとよくする ほうほうを いつもかんがえていて、すごくかしこいタイプだよ！" },
-  ISTP: { name: "ミラクル★てんさいクリエイター", emoji: "\uD83D\uDD27", traits: ["れいせい", "きようだね", "かんさつ力", "じゆうがすき"],
-    desc: "おちついていて、てを うごかして なにかを つくったり なおしたりするのが とくいだよ。こまったときも あわてずに かいけつできる カッコいいタイプ！" },
-  ISFP: { name: "センスばつぐん！おしゃれアーティスト", emoji: "\uD83C\uDFA8", traits: ["かんせいゆたか", "やさしい", "じゆう", "げいじゅつてき"],
-    desc: "おだやかで うつくしいものが だいすきな げいじゅつかタイプ。じぶんらしさを だいじにして、まわりの人にも やさしくできる すてきな子だよ！" },
-  INFP: { name: "ゆめみるやさしい♡ロマンチックフェアリー", emoji: "\uD83E\uDD8B", traits: ["やさしい", "そうぞう力", "ゆめがある", "おもいやり"],
-    desc: "やさしい こころを もっていて、ものがたりや そうぞうの せかいが だいすき。じぶんの 気もちに すなおで、まわりの人の しあわせを ねがっているよ。" },
-  INTP: { name: "ひらめき！マジカルはつめいか", emoji: "\uD83D\uDD2C", traits: ["ちしきがすき", "かんがえるのがすき", "どくそうてき", "ろんりてき"],
-    desc: "「なぜ？」「どうして？」と いつも かんがえている ものしりさん。あたまのなかで いろいろな アイデアを くみたてるのが だいすきだよ！" },
-  ESTP: { name: "わくわく☆チャレンジプリンセス", emoji: "\u26A1", traits: ["こうどうりょく", "げんきいっぱい", "チャレンジずき", "あかるい"],
-    desc: "エネルギッシュで なんでも チャレンジする げんきな子！いま このしゅんかんを ぜんりょくで たのしんで、みんなを ひっぱっていくよ！" },
-  ESFP: { name: "みんなのキラキラアイドル", emoji: "\uD83C\uDF1E", traits: ["あかるい", "たのしい", "にんきもの", "げんき"],
-    desc: "あかるくて みんなの にんきもの！まわりを たのしくする てんさいで、いつも えがおが いっぱい。あたらしいことに ワクワクする タイプだよ！" },
-  ENFP: { name: "わくわくハッピー☆ムードメーカー", emoji: "\uD83C\uDF08", traits: ["あかるい", "そうぞう力", "ワクワクがすき", "ともだちおおい"],
-    desc: "じょうねつてきで そうぞう力ゆたかな じゆうじん！あたらしい アイデアが いっぱいで、まわりの人を ワクワクさせるのが とくいだよ！" },
-  ENTP: { name: "わくわく☆アイデアマジシャン", emoji: "\uD83D\uDCA1", traits: ["あたまがいい", "アイデアマン", "ちょうせんずき", "おもしろい"],
-    desc: "するどい あたまで あたらしいことを どんどん おもいつく はつめいかタイプ！「もっと おもしろくできないかな？」と いつもかんがえているよ！" },
-  ESTJ: { name: "みんなのパーフェクトリーダー", emoji: "\uD83D\uDC51", traits: ["リーダーシップ", "しっかりもの", "せきにんかん", "がんばりや"],
-    desc: "みんなを まとめるのが じょうずな リーダータイプ！ルールを だいじにして、さいごまで せきにんをもって がんばる たよれる子だよ！" },
-  ESFJ: { name: "ハッピー！パーティープリンセス！", emoji: "\uD83C\uDF3B", traits: ["おもいやり", "やさしい", "めんどうみがいい", "にんきもの"],
-    desc: "あたたかくて めんどうみが いい みんなの おせわやくさん。まわりの人の えがおが じぶんの よろこびで、みんなから すかれるタイプだよ！" },
-  ENFJ: { name: "みんなのあこがれ！やさしいプリンセス", emoji: "\u2728", traits: ["おもいやり", "リーダーシップ", "はげましじょうず", "じょうねつてき"],
-    desc: "うまれながらの リーダーで、まわりの人を はげまして げんきにする ちからが あるよ。みんなの いいところを ひきだす すてきなタイプ！" },
-  ENTJ: { name: "パーフェクトクイーン", emoji: "\uD83D\uDE80", traits: ["けつだんりょく", "もくひょうがある", "つよいいし", "カッコいい"],
-    desc: "おおきな もくひょうに むかって まっすぐ すすむ カッコいいリーダー！いつも 「もっとよくなるには？」と かんがえて、みんなを ひっぱっていくよ！" },
+  ISTJ: {
+    name: "たよれる！みんなのやさしい先生",
+    emoji: "\uD83D\uDCD6",
+    traits: [rb("真面目", "まじめ"), "きちんとしてる", `${rb("約束", "やくそく")}を まもる`, `${rb("信頼", "しんらい")}できる`],
+    desc: `${rb("静", "しず")}かで ${rb("真面目", "まじめ")}な がんばりやさん。${rb("約束", "やくそく")}や ルールを ${rb("大事", "だいじ")}にして、${rb("最後", "さいご")}まで きちんと やりとげるよ。みんなから ${rb("信頼", "しんらい")}される すてきなタイプだよ！`
+  },
+  ISFJ: {
+    name: "ぽかぽか！やさしいエンジェル",
+    emoji: "\uD83C\uDF3C",
+    traits: ["やさしい", rb("思", "おも") + "いやり", `${rb("守", "まも")}ってくれる`, `${rb("我慢強", "がまんづよ")}い`],
+    desc: `あたたかくて やさしい、みんなを そっと ささえてくれる ${rb("子", "こ")}。まわりの ${rb("人", "ひと")}の ${rb("気持", "きも")}ちに よく きづいて、こまっている ${rb("子", "こ")}を たすけてあげるよ。`
+  },
+  INFJ: {
+    name: "ひみつのやさしいまほうつかい",
+    emoji: "\uD83C\uDF1F",
+    traits: [rb("思", "おも") + "いやり", `${rb("夢", "ゆめ")}がある`, `${rb("想像力", "そうぞうりょく")}`, "やさしい"],
+    desc: `こころの ${rb("奥", "おく")}に ${rb("大", "おお")}きな ${rb("夢", "ゆめ")}を もつ やさしい ${rb("子", "こ")}。まわりの ${rb("人", "ひと")}の ${rb("気持", "きも")}ちが よくわかって、みんなが しあわせになることを いつも ${rb("考", "かんが")}えているよ。`
+  },
+  INTJ: {
+    name: "クールなちょう☆てんさい！",
+    emoji: "\uD83E\uDDE0",
+    traits: [rb("頭", "あたま") + "がいい", `${rb("計画", "けいかく")}じょうず`, `${rb("独立心", "どくりつしん")}`, `${rb("目標", "もくひょう")}がある`],
+    desc: `${rb("自分", "じぶん")}で ${rb("考", "かんが")}えて ${rb("計画", "けいかく")}を たてるのが ${rb("得意", "とくい")}な ${rb("子", "こ")}。なにかを もっとよくする ${rb("方法", "ほうほう")}を いつも ${rb("考", "かんが")}えていて、すごく かしこいタイプだよ！`
+  },
+  ISTP: {
+    name: "ミラクル★てんさいクリエイター",
+    emoji: "\uD83D\uDD27",
+    traits: [rb("冷静", "れいせい"), `${rb("器用", "きよう")}だね`, `${rb("観察力", "かんさつりょく")}`, `${rb("自由", "じゆう")}がすき`],
+    desc: `${rb("落", "お")}ちついていて、てを うごかして なにかを つくったり なおしたりするのが ${rb("得意", "とくい")}だよ。こまったときも あわてずに ${rb("解決", "かいけつ")}できる カッコいいタイプ！`
+  },
+  ISFP: {
+    name: "センスばつぐん！おしゃれアーティスト",
+    emoji: "\uD83C\uDFA8",
+    traits: [`${rb("感性", "かんせい")}ゆたか`, "やさしい", rb("自由", "じゆう"), `${rb("芸術的", "げいじゅつてき")}`],
+    desc: `おだやかで うつくしいものが ${rb("大好", "だいす")}きな ${rb("芸術家", "げいじゅつか")}タイプ。${rb("自分", "じぶん")}らしさを ${rb("大事", "だいじ")}にして、まわりの ${rb("人", "ひと")}にも やさしくできる すてきな ${rb("子", "こ")}だよ！`
+  },
+  INFP: {
+    name: "ゆめみるやさしい♡ロマンチックフェアリー",
+    emoji: "\uD83E\uDD8B",
+    traits: ["やさしい", `${rb("想像力", "そうぞうりょく")}`, `${rb("夢", "ゆめ")}がある`, rb("思", "おも") + "いやり"],
+    desc: `やさしい こころを もっていて、ものがたりや ${rb("想像", "そうぞう")}の せかいが ${rb("大好", "だいす")}き。${rb("自分", "じぶん")}の ${rb("気持", "きも")}ちに すなおで、まわりの ${rb("人", "ひと")}の しあわせを ねがっているよ。`
+  },
+  INTP: {
+    name: "ひらめき！マジカルはつめいか",
+    emoji: "\uD83D\uDD2C",
+    traits: [`${rb("知識", "ちしき")}がすき`, `${rb("考", "かんが")}えるのがすき`, `${rb("独創的", "どくそうてき")}`, `${rb("論理的", "ろんりてき")}`],
+    desc: `「なぜ？」「どうして？」と いつも ${rb("考", "かんが")}えている ものしりさん。${rb("頭", "あたま")}のなかで いろいろな アイデアを ${rb("組", "く")}みたてるのが ${rb("大好", "だいす")}きだよ！`
+  },
+  ESTP: {
+    name: "わくわく☆チャレンジプリンセス",
+    emoji: "\u26A1",
+    traits: [`${rb("行動力", "こうどうりょく")}`, `${rb("元気", "げんき")}いっぱい`, "チャレンジずき", "あかるい"],
+    desc: `エネルギッシュで なんでも チャレンジする ${rb("元気", "げんき")}な ${rb("子", "こ")}！いま この しゅんかんを ${rb("全力", "ぜんりょく")}で たのしんで、みんなを ひっぱっていくよ！`
+  },
+  ESFP: {
+    name: "みんなのキラキラアイドル",
+    emoji: "\uD83C\uDF1E",
+    traits: ["あかるい", "たのしい", `${rb("人気者", "にんきもの")}`, "げんき"],
+    desc: `あかるくて みんなの ${rb("人気者", "にんきもの")}！まわりを たのしくする ${rb("天才", "てんさい")}で、いつも ${rb("笑顔", "えがお")}が いっぱい。あたらしいことに ワクワクする タイプだよ！`
+  },
+  ENFP: {
+    name: "わくわくハッピー☆ムードメーカー",
+    emoji: "\uD83C\uDF08",
+    traits: ["あかるい", `${rb("想像力", "そうぞうりょく")}`, "ワクワクがすき", `${rb("友", "とも")}だちおおい`],
+    desc: `${rb("情熱的", "じょうねつてき")}で ${rb("想像力", "そうぞうりょく")}ゆたかな ${rb("自由人", "じゆうじん")}！あたらしい アイデアが いっぱいで、まわりの ${rb("人", "ひと")}を ワクワクさせるのが ${rb("得意", "とくい")}だよ！`
+  },
+  ENTP: {
+    name: "わくわく☆アイデアマジシャン",
+    emoji: "\uD83D\uDCA1",
+    traits: [rb("頭", "あたま") + "がいい", "アイデアマン", `${rb("挑戦", "ちょうせん")}ずき`, "おもしろい"],
+    desc: `するどい ${rb("頭", "あたま")}で あたらしいことを どんどん ${rb("思", "おも")}いつく ${rb("発明家", "はつめいか")}タイプ！「もっと おもしろく できないかな？」と いつも ${rb("考", "かんが")}えているよ！`
+  },
+  ESTJ: {
+    name: "みんなのパーフェクトリーダー",
+    emoji: "\uD83D\uDC51",
+    traits: ["リーダーシップ", "しっかりもの", `${rb("責任感", "せきにんかん")}`, "がんばりや"],
+    desc: `みんなを まとめるのが じょうずな リーダータイプ！ルールを ${rb("大事", "だいじ")}にして、${rb("最後", "さいご")}まで ${rb("責任", "せきにん")}を もって がんばる たよれる ${rb("子", "こ")}だよ！`
+  },
+  ESFJ: {
+    name: "ハッピー！パーティープリンセス！",
+    emoji: "\uD83C\uDF3B",
+    traits: [rb("思", "おも") + "いやり", "やさしい", `${rb("面倒見", "めんどうみ")}がいい`, `${rb("人気者", "にんきもの")}`],
+    desc: `あたたかくて ${rb("面倒見", "めんどうみ")}が いい みんなの おせわやくさん。まわりの ${rb("人", "ひと")}の ${rb("笑顔", "えがお")}が ${rb("自分", "じぶん")}の よろこびで、みんなから すかれるタイプだよ！`
+  },
+  ENFJ: {
+    name: "みんなのあこがれ！やさしいプリンセス",
+    emoji: "\u2728",
+    traits: [rb("思", "おも") + "いやり", "リーダーシップ", `${rb("励", "はげ")}ましじょうず`, `${rb("情熱的", "じょうねつてき")}`],
+    desc: `うまれながらの リーダーで、まわりの ${rb("人", "ひと")}を ${rb("励", "はげ")}まして ${rb("元気", "げんき")}にする ちからが あるよ。みんなの いいところを ひきだす すてきなタイプ！`
+  },
+  ENTJ: {
+    name: "パーフェクトクイーン",
+    emoji: "\uD83D\uDE80",
+    traits: [`${rb("決断力", "けつだんりょく")}`, `${rb("目標", "もくひょう")}がある`, `${rb("強", "つよ")}い いし`, "カッコいい"],
+    desc: `${rb("大", "おお")}きな ${rb("目標", "もくひょう")}に むかって まっすぐ すすむ カッコいいリーダー！いつも 「もっと よくなるには？」と ${rb("考", "かんが")}えて、みんなを ひっぱっていくよ！`
+  },
 };
 
 // ===== 状態管理 =====
@@ -895,10 +972,10 @@ function showQuestion() {
   const pct = Math.round((currentQ / total) * 100);
 
   document.getElementById("progress-fill").style.width = pct + "%";
-  document.getElementById("progress-text").textContent = `\u2B50 ${currentQ + 1} / ${total} もんめ \u2B50`;
+  document.getElementById("progress-text").innerHTML = `\u2B50 ${currentQ + 1} / ${total} <ruby>問目<rt>もんめ</rt></ruby> \u2B50`;
 
   const modeLabel = quizMode === 'friend'
-    ? `<div class="quiz-mode-label">\uD83D\uDC3B ${friendName}の しんだんちゅう</div>`
+    ? `<div class="quiz-mode-label">\uD83D\uDC3B ${friendName}の <ruby>診断中<rt>しんだんちゅう</rt></ruby></div>`
     : '';
 
   const card = document.getElementById("question-card");
@@ -919,7 +996,7 @@ function showQuestion() {
   // もどるボタン
   const nav = document.getElementById("nav-buttons");
   if (currentQ > 0) {
-    nav.innerHTML = `<button class="back-btn" onclick="goBack()"> まえの もんだいに もどる</button>`;
+    nav.innerHTML = `<button class="back-btn" onclick="goBack()"><ruby>前<rt>まえ</rt></ruby>の <ruby>問題<rt>もんだい</rt></ruby>に もどる</button>`;
   } else {
     nav.innerHTML = '';
   }
@@ -988,10 +1065,10 @@ function showResult() {
   });
 
   const dims = [
-    { left: "E（がいこうがた）", right: "I（ないこうがた）", lv: scores.E, rv: scores.I },
-    { left: "S（かんかくがた）", right: "N（ちょっかんがた）", lv: scores.S, rv: scores.N },
-    { left: "T（しこうがた）", right: "F（かんじょうがた）", lv: scores.T, rv: scores.F },
-    { left: "J（はんだんがた）", right: "P（ちかくがた）", lv: scores.J, rv: scores.P },
+    { left: "E（<ruby>外向型<rt>がいこうがた</rt></ruby>）", right: "I（<ruby>内向型<rt>ないこうがた</rt></ruby>）", lv: scores.E, rv: scores.I },
+    { left: "S（<ruby>感覚型<rt>かんかくがた</rt></ruby>）", right: "N（<ruby>直感型<rt>ちょっかんがた</rt></ruby>）", lv: scores.S, rv: scores.N },
+    { left: "T（<ruby>思考型<rt>しこうがた</rt></ruby>）", right: "F（<ruby>感情型<rt>かんじょうがた</rt></ruby>）", lv: scores.T, rv: scores.F },
+    { left: "J（<ruby>判断型<rt>はんだんがた</rt></ruby>）", right: "P（<ruby>知覚型<rt>ちかくがた</rt></ruby>）", lv: scores.J, rv: scores.P },
   ];
 
   let dimHTML = dims.map(d => {
@@ -1019,12 +1096,12 @@ function showResult() {
   // OGP画像を結果のくまに更新
   updateOGP(type);
 
-  const resultName = quizMode === 'friend' ? friendName : '\u304D\u307F';
+  const resultName = quizMode === 'friend' ? friendName : rb("君", "きみ");
 
   document.getElementById("result-card").innerHTML = `
     ${charaHTML}
     <div class="type-label">${type}</div>
-    <div class="type-name">${resultName}\u306F\u300C${info.name}\u300D\u30BF\u30A4\u30D7\uFF01</div>
+    <div class="type-name">${resultName}は「${info.name}」タイプ！</div>
     <div class="traits">${traitsHTML}</div>
     <div class="type-desc">${info.desc}</div>
     <div class="dimension-bars">${dimHTML}</div>
@@ -1039,7 +1116,7 @@ function showResult() {
 function shareButtonsHTML(type) {
   return `
     <div class="share-section">
-      <div class="share-title">\uD83C\uDF80 けっかを シェアする \uD83C\uDF80</div>
+      <div class="share-title">\uD83C\uDF80 <ruby>結果<rt>けっか</rt></ruby>を シェアする \uD83C\uDF80</div>
       <div class="share-buttons">
         <button class="share-btn" onclick="shareLINE('${type}')">
           <svg viewBox="0 0 48 48" fill="none"><rect rx="12" width="48" height="48" fill="#06C755"/><path d="M24 11C16.82 11 11 15.55 11 21.14c0 5.01 4.45 9.21 10.44 10.6.41.09.96.27 1.1.62.12.32.08.81.04 1.13l-.18 1.06c-.05.32-.25 1.24 1.09.68 1.34-.57 7.2-4.24 9.83-7.26C35.64 25.2 37 23.28 37 21.14 37 15.55 31.18 11 24 11z" fill="white"/></svg>
@@ -1051,7 +1128,7 @@ function shareButtonsHTML(type) {
         </button>
         <button class="share-btn" onclick="saveImage('${type}')">
           <svg viewBox="0 0 48 48" fill="none"><defs><linearGradient id="ig-grad" x1="0" y1="48" x2="48" y2="0"><stop offset="0%" stop-color="#FFC107"/><stop offset="50%" stop-color="#F44336"/><stop offset="100%" stop-color="#9C27B0"/></linearGradient></defs><rect rx="12" width="48" height="48" fill="url(#ig-grad)"/><rect x="14" y="14" width="20" height="20" rx="6" stroke="white" stroke-width="2.5" fill="none"/><circle cx="24" cy="24" r="5.5" stroke="white" stroke-width="2.5" fill="none"/><circle cx="31" cy="17" r="1.5" fill="white"/></svg>
-          <span>画像を保存</span>
+          <span><ruby>画像<rt>がぞう</rt></ruby>を <ruby>保存<rt>ほぞん</rt></ruby></span>
         </button>
       </div>
     </div>`;
@@ -1068,7 +1145,7 @@ function shareText(type) {
 function officialLinksHTML(source) {
   return `
     <div class="official-links result-links">
-      <div class="official-links-title">\uD83D\uDCD6 もっと ゆめいろべあーずを たのしむ \uD83D\uDCD6</div>
+      <div class="official-links-title">\uD83D\uDCD6 もっと ゆめいろべあーずを <ruby>楽<rt>たの</rt></ruby>しむ \uD83D\uDCD6</div>
       <div class="official-links-grid">
         <a class="official-link portal" href="https://yumeiro.yonde-web.com/" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('portal', '${source}')">\u3086\u3081\u3044\u308D\u30DD\u30FC\u30BF\u30EB</a>
         <a class="official-link x-link" href="https://x.com/StorybookYonde" target="_blank" rel="noopener noreferrer" onclick="trackOfficialLink('x', '${source}')">X</a>
@@ -1118,11 +1195,11 @@ function updateOGP(type) {
 
 function resultButtonsHTML() {
   if (quizMode === 'self') {
-    return '<button class="btn-secondary btn-secondary-friend" onclick="showFriendNameScreen()">\uD83D\uDC9C \u304A\u3068\u3082\u3060\u3061\u3082 \u3057\u3093\u3060\u3093\u3059\u308B\uFF01</button>' +
-      '<button class="btn-secondary" onclick="retry()">\uD83D\uDD04 \u3082\u3046\u3044\u3061\u3069 \u3084\u3063\u3066\u307F\u308B\uFF01</button>';
+    return '<button class="btn-secondary btn-secondary-friend" onclick="showFriendNameScreen()">\uD83D\uDC9C <ruby>友<rt>とも</rt></ruby>だちも <ruby>診断<rt>しんだん</rt></ruby>する！</button>' +
+      '<button class="btn-secondary" onclick="retry()">\uD83D\uDD04 もう<ruby>一度<rt>いちど</rt></ruby> やってみる！</button>';
   } else {
-    return '<button class="btn-secondary" onclick="startSelfQuiz()">\uD83D\uDC96 \u3058\u3076\u3093\u3082 \u3084\u3063\u3066\u307F\u308B\uFF01</button>' +
-      '<button class="btn-secondary btn-secondary-friend" onclick="showFriendNameScreen()">\uD83D\uDD04 \u3082\u3046\u3044\u3061\u3069 \u3068\u3082\u3060\u3061\u3057\u3093\u3060\u3093\u3092 \u3084\u3063\u3066\u307F\u308B\uFF01</button>';
+    return '<button class="btn-secondary" onclick="startSelfQuiz()">\uD83D\uDC96 <ruby>自分<rt>じぶん</rt></ruby>も やってみる！</button>' +
+      '<button class="btn-secondary btn-secondary-friend" onclick="showFriendNameScreen()">\uD83D\uDD04 もう<ruby>一度<rt>いちど</rt></ruby> <ruby>友<rt>とも</rt></ruby>だち<ruby>診断<rt>しんだん</rt></ruby>を やってみる！</button>';
   }
 }
 
@@ -1154,12 +1231,12 @@ function goHome() {
     document.getElementById("result-card").innerHTML =
       charaHTML +
       '<div class="type-label">' + type + '</div>' +
-      '<div class="type-name">\u304D\u307F\u306F\u300C' + info.name + '\u300D\u30BF\u30A4\u30D7\uFF01</div>' +
+      '<div class="type-name">' + rb('君', 'きみ') + 'は「' + info.name + '」タイプ！</div>' +
       '<div class="traits">' + traitsHTML + '</div>' +
       '<div class="type-desc">' + info.desc + '</div>' +
       shareButtonsHTML(type) +
       officialLinksHTML('direct_result') +
-      '<button class="btn-secondary" onclick="startQuiz()">\u2728 \u3058\u3076\u3093\u3082 \u3084\u3063\u3066\u307F\u308B\uFF01</button>';
+      '<button class="btn-secondary" onclick="startQuiz()">✨ ' + rb('自分', 'じぶん') + 'も やってみる！</button>';
   }
 })();
 </script>
